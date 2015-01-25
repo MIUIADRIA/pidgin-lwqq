@@ -13,6 +13,8 @@
 			lwdb_get_config_dir()),buf)
 #define GLOBAL_HASH_JS(buf) (snprintf(buf,sizeof(buf),"%s"LWQQ_PATH_SEP"hash.js",\
 			GLOBAL_DATADIR),buf)
+#define GLOBAL_RES_FILE(res, buf) (snprintf(buf,sizeof(buf),"%s"LWQQ_PATH_SEP res,\
+			GLOBAL_DATADIR),buf)
 
 TABLE_BEGIN_LONG(qq_shengxiao_to_str, const char*,LwqqShengxiao , "")
     TR(LWQQ_MOUTH,_("Mouth"))     TR(LWQQ_CATTLE,_("Cattle"))
@@ -142,6 +144,7 @@ static char* hash_with_db_url(const char* uin,const char* ptwebqq,qq_account* ac
 
 qq_account* qq_account_new(PurpleAccount* account)
 {
+	static char buf[256];
 	qq_account* ac = g_malloc0(sizeof(qq_account));
 	ac->account = account;
 	ac->magic = QQ_MAGIC;
@@ -151,6 +154,7 @@ qq_account* qq_account_new(PurpleAccount* account)
 	const char* password = purple_account_get_password(account);
 	ac->qq = lwqq_client_new(username,password);
 	ac->js = lwqq_js_init();
+	ac->qq->encryption_js = GLOBAL_RES_FILE("encrypt.js", buf);
 	ac->sys_log = purple_log_new(PURPLE_LOG_SYSTEM, "system", account, NULL, time(NULL), NULL);
 #ifdef WITH_MOZJS
 	lwqq_hash_add_entry(ac->qq, "hash_local", (LwqqHashFunc)hash_with_local_file,  ac->js);
