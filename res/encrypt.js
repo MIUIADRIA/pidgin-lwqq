@@ -1397,3 +1397,106 @@ Encryption = function() {
 })(window);
 //export symbol
 encryption = Encryption.getEncryption;
+
+/*
+pt = {
+   isHttps:1,
+   needAt:"",
+   action:[0,8],
+};
+g_domain="qq.com";
+g_appid="501004106";
+g_ptredirect="0";
+
+s_webqq_type="10";
+
+c : [
+  {name : "u",            value : "<qqnum>"},
+  {name : "p",            value : "<passwd>"},
+  {name : "verifycode",   value : "<vf>"},
+  {name : "webqq_type",   value : "10", checked : false},
+  {name : "remember_uin", value : "1"},
+  {name : "login2qq",     value : "1"},
+  {name : "",             value : "", type : "submit"},
+  {name : "aid",          value : "501004106"},
+  {name : "u1",           value : "http://w.qq.com/proxy.html"},
+  {name : "fp",           value : "loginerroralert"},
+  {name : "h",            value : "1"},
+  {name : "ptredict",     value : "0"},
+  {name : "ptlang",       value : "2052"},
+  {name : "daid",         value : "164"},
+  {name : "from_ui",      value : "1"},
+{name:"pttype",value:"1"},
+{name:"dummy",value:""},
+];
+
+function getSubmitUrl(h, c) {
+    var e = true;
+    //var c = document.forms[0];
+    var a = (pt.isHttps ? "https://ssl." : "http://") + "ptlogin2." + g_domain + "/" + h + "?";
+    var b = {name:"login2qq",value:"1"};
+    if (pt.regmaster == 2) {
+        a = "http://ptlogin2.function.qq.com/" + h + "?regmaster=2&"
+    } else {
+        if (pt.regmaster == 3) {
+            a = "http://ptlogin2.crm2.qq.com/" + h + "?regmaster=3&"
+        }
+    }
+    for (var g = 0; g < c.length; g++) {
+        if (h == "ptqrlogin" && (c[g].name == "u" || c[g].name == "p" || c[g].name == "verifycode" || c[g].name == "h")) {
+            continue
+        }
+        if (c[g].name == "ipFlag" && !c[g].checked) {
+            a += c[g].name + "=-1&";
+            continue
+        }
+        if (c[g].name == "fp" || c[g].type == "submit") {
+            continue
+        }
+        if (c[g].name == "ptredirect") {
+            g_ptredirect = c[g].value
+        }
+        if (c[g].name == "low_login_enable" && (!c[g].checked)) {
+            e = false;
+            continue
+        }
+        if (c[g].name == "low_login_hour" && (!e)) {
+            continue
+        }
+        if (c[g].name == "webqq_type" && !b && (!c[g].checked)) {
+            continue
+        }
+        a += c[g].name;
+        a += "=";
+        if (c[g].name == "u" && pt.needAt) {
+            a += pt.needAt + "&";
+            continue
+        }
+        if (c[g].name == "p") {
+            a += $.Encryption.getEncryption(c[g].value, pt.salt, c[g+1].value)
+        } else {
+            if (c[g].name == "u1" || c[g].name == "ep") {
+                var d = c[g].value;
+                var j = "";
+                if ((g_appid == "1003903" || g_appid == "501004106") && b) {
+                    j = /\?/g.test(d) ? "&" : "?";
+                    var f = s_webqq_type;
+                    j += "login2qq=" + b.value + "&webqq_type=" + f
+                }
+                a += encodeURIComponent(d + j)
+            } else {
+                a += c[g].value
+            }
+        }
+        a += "&"
+    }
+    a += "fp=loginerroralert&action=" + pt.action.join("-") + "-" + (new Date() - g_begTime) + "&mibao_css=" + pt.mibao_css + "&t=" + pt.submitN[pt.uin] + "&g=1";
+    a += "&js_type=" + pt.js_type + "&js_ver=" + window.g_pt_version + "&login_sig=" + window.g_login_sig;
+    a += "&pt_randsalt=" + (pt.isRandSalt || 0);
+    if (h == "login") {
+        a += "&pt_vcode_v1=0";
+        a += ("&pt_verifysession_v1=" + (pt.pt_verifysession || pt.cookie.get("verifysession")))
+    }
+    return a
+}
+*/
